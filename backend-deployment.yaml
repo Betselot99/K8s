@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+      - name: backend-api
+        image: kaleabg/saf-ja-k8s-test-backend:1.0.0
+        ports:
+        - containerPort: 80
+        env: 
+        - name: POSTGRES_SERVER
+          value: postgres-db-svc
+        - name: POSTGRES_USER 
+          value: postgres
+        - name: POSTGRES_DB 
+          value: todo_app
+        - name: BACKEND_CORS_ORIGINS 
+          value: "[\"http://fe.betselot.gebeyalearning.com\"]"
+        - name: PROJECT_NAME
+          value: My-Todo-app
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-password-secret
+              key: postgres-password
+    
