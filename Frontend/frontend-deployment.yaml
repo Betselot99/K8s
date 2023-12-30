@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: kaleabg/saf-ja-k8s-test-frontend:1.0.0
+        ports:
+        - containerPort: 80
+        env: 
+        - name: REACT_APP_BACKEND_BASE_URI
+          value: "http://be.betselot.gebeyalearning.com/api/items"
+      
