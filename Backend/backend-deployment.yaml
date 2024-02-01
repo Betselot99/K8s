@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend-api
-        image: kaleabg/saf-ja-k8s-test-backend:1.0.0
+        image: betselot456/backend:a340b3585386f1b9c9f91cbc56464be48732a3c8
         ports:
         - containerPort: 80
         env: 
